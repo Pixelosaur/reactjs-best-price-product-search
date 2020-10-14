@@ -1,0 +1,30 @@
+@import '../../scss/_colors.scss';
+
+:root {
+    --user-action-link-color: #{$accent-color};
+}
+
+header {
+    background-color: white;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+    min-width: 100%;
+    padding: 0.94rem 0;
+
+    #logo-container {
+        img {
+            height: 50px;
+        }
+    }
+
+    #user-actions-container {
+        span {
+            font-size: 0.875rem;
+            color: var(--user-action-link-color);
+            cursor: pointer;
+
+            &:first-child {
+                margin-right: 0.75rem;
+            }
+        }
+    }
+}

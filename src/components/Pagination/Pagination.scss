@@ -1,0 +1,22 @@
+@import '../../scss/colors';
+
+.page-item {
+    &.disabled {
+        .page-link {
+            background-color: transparent !important;
+            opacity: 0.6;
+        }
+    }
+
+    .page-link {
+        cursor: pointer;
+        background-color: transparent;
+        color: var(--link-color);
+        font-weight: 600;
+        transition: ease-in-out 300ms;
+
+        &:hover {
+            color: var(--link-color-hover);
+        }
+    }
+}

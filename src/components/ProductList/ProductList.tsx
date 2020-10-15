@@ -21,7 +21,7 @@ function ProductList({ match }: any) {
     const [order, setOrder] = useState<string>('desc');
     const [maxPrice, setMaxPrice] = useState<number>(1000);
     const [minPrice, setMinPrice] = useState<number>(100);
-    const [isLoading, setIsloading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     /* Get Category by Id and return a Promise of the category object
      * */
@@ -59,7 +59,7 @@ function ProductList({ match }: any) {
     }
 
     useEffect(() => {
-        setIsloading(true);
+        setIsLoading(true);
 
         const { id } = match.params;
         const params: ProductQueryParams = {
@@ -72,9 +72,9 @@ function ProductList({ match }: any) {
         };
 
         getProducts(id, params).then(() => {
-            setIsloading(false);
+            setIsLoading(false);
         });
-    }, [setCategory, setProducts, setIsloading, match.params]);
+    }, [setCategory, setProducts, setIsLoading, match.params]);
 
     return (
         <>

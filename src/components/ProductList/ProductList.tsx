@@ -11,12 +11,13 @@ import { CategorySingle } from '../../interfaces/CategorySingle.interface';
 import { ProductQueryParams } from '../../interfaces/ProductQueryParams.interface';
 // Components
 import Loader from '../Loader/Loader';
+import Pagination from '../Pagination/Pagination';
 
 function ProductList({ match }: any) {
     const [products, setProducts] = useState<Product[]>([]);
     const [category, setCategory] = useState<Category | null>(null);
     const [page, setPage] = useState<number>(1);
-    const [pageLimit, setPageLimit] = useState<number>(10);
+    const [pageLimit, setPageLimit] = useState<number>(15);
     const [sort, setSort] = useState<string>('title');
     const [order, setOrder] = useState<string>('desc');
     const [maxPrice, setMaxPrice] = useState<number>(1000);
@@ -58,6 +59,10 @@ function ProductList({ match }: any) {
         return products;
     }
 
+    function onPageChange(pageNumber: number): void {
+        setPage(pageNumber);
+    }
+
     useEffect(() => {
         setIsLoading(true);
 
@@ -74,7 +79,7 @@ function ProductList({ match }: any) {
         getProducts(id, params).then(() => {
             setIsLoading(false);
         });
-    }, [setCategory, setProducts, setIsLoading, match.params]);
+    }, [match.params, page, order, maxPrice, minPrice, sort, pageLimit]);
 
     return (
         <>
@@ -83,34 +88,27 @@ function ProductList({ match }: any) {
             ) : (
                 <>
                     <h3>{category?.title}</h3>
-                    <div className="row row-cols-1 row-cols-2">
+                    <div className="row row-cols-3 pt-4 pb-5">
                         {products.map((product: Product, index: number) => (
                             <div key={index} className="col mb-4">
                                 <div className="card h-100">
-                                    <div className="row no-gutters">
-                                        <div className="col-6">
-                                            <img
-                                                src={product.image_url}
-                                                className="card-img"
-                                                alt="Product Category"
-                                            />
-                                        </div>
-                                        <div className="col-6">
-                                            <div className="card-body">
-                                                <h5 className="card-title">{product.title}</h5>
-                                                <Link
-                                                    to={`${product.slug_path}/${product.id}/products`}
-                                                >
-                                                    Το θέλω
-                                                    <i className="fas fa-long-arrow-alt-right" />
-                                                </Link>
-                                            </div>
-                                        </div>
+                                    <img
+                                        src={product.image_url}
+                                        className="card-img-top"
+                                        alt="Product Category"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">{product.title}</h5>
+                                        <Link to={`${product.slug_path}/${product.id}/products`}>
+                                            Το θέλω
+                                            <i className="fas fa-long-arrow-alt-right" />
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
+                    <Pagination onPageChange={onPageChange} currentPage={page} />
                 </>
             )}
         </>

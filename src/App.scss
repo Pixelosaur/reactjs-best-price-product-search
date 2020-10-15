@@ -10,6 +10,11 @@
     --border-color: #{lighten($accent-color, 35%)};
 }
 
+::selection {
+    background: $primary-color;
+    color: white;
+}
+
 .app-wrapper {
     background-color: var(--page-bg-color);
     color: var(--typography-base-color);

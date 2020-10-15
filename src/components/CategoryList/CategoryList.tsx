@@ -15,25 +15,24 @@ function CategoryList() {
     const [categories, setCategories] = useState<Category[]>([]);
     const [isLoading, setIsloading] = useState<boolean>(false);
 
-    function getCategories(): void {
-        setIsloading(true);
-
+    async function getCategories(): Promise<Category[]> {
         const apiUrl: string = `${API_URL_CATEGORIES}`;
-        axios
-            .get<Category[]>(apiUrl)
-            .then((response: AxiosResponse<Category[]>) => response.data)
-            .then((categories: Category[]) => {
-                // Sort categories based on their position
-                categories.sort((a: Category, b: Category) => {
-                    return a.position - b.position;
-                });
-                setIsloading(false);
-                setCategories(categories);
-            });
+
+        const response: AxiosResponse<Category[]> = await axios.get<Category[]>(apiUrl);
+        const categories: Category[] = response.data;
+        // Sort categories based on their position
+        const sortedCategories: Category[] = categories.sort((a: Category, b: Category) => {
+            return a.position - b.position;
+        });
+        setCategories(categories);
+
+        return sortedCategories;
     }
 
     useEffect(() => {
-        getCategories();
+        setIsloading(true);
+
+        getCategories().then(() => setIsloading(false));
     }, [setCategories, setIsloading]);
 
     return (

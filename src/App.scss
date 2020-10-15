@@ -4,6 +4,7 @@
     --page-bg-color: #{$light-color};
     --typography-base-color: #{$dark-color};
     --link-color: #{$secondary-color};
+    --link-color-hover: #{$primary-color};
 }
 
 .app-wrapper {
@@ -19,6 +20,21 @@
     a {
         color: var(--link-color);
         font-size: 0.875rem;
+
+        .fas {
+            vertical-align: middle;
+            margin-left: 5px;
+            transition: transform ease-in-out 300ms;
+        }
+
+        &:hover {
+            color: var(--link-color-hover);
+            text-decoration: none;
+
+            .fas {
+                transform: translateX(5px);
+            }
+        }
     }
 
     h1,

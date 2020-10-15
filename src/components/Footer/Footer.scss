@@ -1,0 +1,13 @@
+footer {
+    background-color: var(--footer-bg-color);
+    padding: 1.25rem 0;
+    color: var(--typography-footer-color);
+    font-size: .875rem;
+    border-top: 1px solid var(--border-color);
+
+    .fab {
+        &:not(:last-of-type) {
+            margin-right: 1rem;
+        }
+    }
+}

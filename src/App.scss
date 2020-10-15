@@ -2,9 +2,12 @@
 
 :root {
     --page-bg-color: #{$light-color};
+    --footer-bg-color: #{darken($light-color, 5%)};
     --typography-base-color: #{$dark-color};
+    --typography-footer-color: #{$accent-color};
     --link-color: #{$secondary-color};
     --link-color-hover: #{$primary-color};
+    --border-color: #{lighten($accent-color, 35%)};
 }
 
 .app-wrapper {

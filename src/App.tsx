@@ -4,6 +4,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 // Components
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import CategoryList from './components/CategoryList/CategoryList';
 import ProductList from './components/ProductList/ProductList';
 // Styles
@@ -23,6 +24,7 @@ function App() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

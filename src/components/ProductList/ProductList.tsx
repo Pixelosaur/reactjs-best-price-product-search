@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 // Dependencies
 import axios, { AxiosResponse } from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 // Interfaces & Constants
 import { API_URL_CATEGORIES } from '../../Constants';
 import { Product } from '../../interfaces/Product.interface';
@@ -13,7 +13,7 @@ import { ProductQueryParams } from '../../interfaces/ProductQueryParams.interfac
 import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
 
-function ProductList({ match }: any) {
+function ProductList({ match }: RouteComponentProps<any>) {
     const [products, setProducts] = useState<Product[]>([]);
     const [category, setCategory] = useState<Category | null>(null);
     const [page, setPage] = useState<number>(1);

@@ -15,17 +15,16 @@ function CategoryList() {
     const [categories, setCategories] = useState<Category[]>([]);
     const [isLoading, setIsloading] = useState<boolean>(false);
 
-    function getCategories() {
+    function getCategories(): void {
         setIsloading(true);
 
         const apiUrl: string = `${API_URL_CATEGORIES}`;
         axios
             .get<Category[]>(apiUrl)
-            .then((response: AxiosResponse<any[]>) => response.data)
+            .then((response: AxiosResponse<Category[]>) => response.data)
             .then((categories: Category[]) => {
-                console.log(categories);
                 // Sort categories based on their position
-                categories.sort((a, b) => {
+                categories.sort((a: Category, b: Category) => {
                     return a.position - b.position;
                 });
                 setIsloading(false);

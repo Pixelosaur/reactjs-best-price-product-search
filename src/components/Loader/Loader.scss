@@ -1,0 +1,50 @@
+@import '../../scss/_colors';
+
+.spinner {
+    margin: 25% auto 0;
+    width: 100%;
+    text-align: center;
+
+    > div {
+        width: 14px;
+        height: 14px;
+        background-color: $accent-color;
+        border-radius: 100%;
+        display: inline-block;
+        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+
+        &:not(:last-of-type) {
+            margin-right: 10px;
+        }
+    }
+
+    .bounce1 {
+        animation-delay: -0.32s;
+    }
+
+    .bounce2 {
+        animation-delay: -0.16s;
+    }
+}
+
+@-webkit-keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+    }
+    40% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}

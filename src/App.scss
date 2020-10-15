@@ -12,5 +12,22 @@
 
     a {
         color: var(--link-color);
+        font-size: 0.875rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Fira Sans', sans-serif;
+        font-weight: 600;
+    }
+
+    p,
+    a,
+    span {
+        font-family: 'Roboto', sans-serif;
     }
 }

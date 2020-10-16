@@ -1,0 +1,17 @@
+.price-filter-wrapper {
+    form {
+        input {
+            font-size: 0.875rem;
+            border: 1px solid var(--border-color);
+
+            &:focus {
+                box-shadow: none;
+                border-color: var(--link-color-hover);
+            }
+        }
+        span {
+            font-size: .875rem;
+            color: var(--text-muted-color);
+        }
+    }
+}

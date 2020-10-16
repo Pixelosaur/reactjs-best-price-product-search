@@ -1,30 +1,49 @@
 import React from 'react';
 
-function PriceFilter({ minPrice, maxPrice, handleChange }: any) {
+import './PriceFilter.scss';
+
+interface PriceFilterProps {
+    minPrice: number;
+    maxPrice: number;
+    handleChange: any;
+}
+
+function PriceFilter({ minPrice, maxPrice, handleChange }: PriceFilterProps) {
     return (
-        <form>
-            <div className="form-row">
-                <div className="col">
-                    <input
-                        type="number"
-                        value={minPrice}
-                        name="minPrice"
-                        className="form-control"
-                        onChange={handleChange}
-                    />
+        <div className="price-filter-wrapper">
+            <form>
+                <div className="form-row justify-content-start align-items-center">
+                    <span>Τιμή από</span>
+                    <div className="col col-md-3">
+                        <input
+                            type="number"
+                            value={minPrice}
+                            min={minPrice}
+                            name="minPrice"
+                            className="form-control"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <span>μέχρι</span>
+                    <div className="col col-md-3">
+                        <input
+                            type="number"
+                            name="maxPrice"
+                            value={maxPrice}
+                            max={maxPrice}
+                            className="form-control"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <span>€</span>
+                    <div className="col col-md-2 ml-2">
+                        <button type="submit" className="btn btn-sm btn-bp-primary">
+                            <i className="fas fa-check" />
+                        </button>
+                    </div>
                 </div>
-                <span>μέχρι</span>
-                <div className="col">
-                    <input
-                        type="number"
-                        name="maxPrice"
-                        value={maxPrice}
-                        className="form-control"
-                        onChange={handleChange}
-                    />
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     );
 }
 export default PriceFilter;

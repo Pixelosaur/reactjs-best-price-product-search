@@ -11,7 +11,7 @@ function PageTitle({ title, productsCount }: PageTitleProps) {
     return (
         <div className="d-flex justify-content-between align-items-center mb-4 page-title-wrapper">
             <div>
-                <h3 className="d-inline-block mr-2 title">{title}</h3>
+                <h4 className="d-inline-block mr-2 title">{title}</h4>
                 <span className="text-muted">{productsCount} Προϊόντα</span>
             </div>
             <div>

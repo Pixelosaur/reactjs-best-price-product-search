@@ -37,7 +37,7 @@ function PriceFilter({ minPrice, maxPrice, handleChange }: PriceFilterProps) {
                     </div>
                     <span>€</span>
                     <div className="col col-md-2 ml-2">
-                        <button type="submit" className="btn btn-sm btn-bp-primary">
+                        <button type="submit" className="btn btn-sm btn-bp-primary-outline">
                             <i className="fas fa-check" />
                         </button>
                     </div>

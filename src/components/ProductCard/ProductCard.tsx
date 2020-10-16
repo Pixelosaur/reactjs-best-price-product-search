@@ -22,9 +22,7 @@ function ProductCard({ products }: ProductCardProps<Product[]>) {
                         </div>
                         <div className="card-body">
                             <h6 className="card-title">
-                                <Link to="#" className="stretched-link">
-                                    {product.title}
-                                </Link>
+                                <Link to="#">{product.title}</Link>
                             </h6>
                             {product.excerpt !== null ? (
                                 <p

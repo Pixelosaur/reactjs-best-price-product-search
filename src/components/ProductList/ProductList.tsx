@@ -23,9 +23,9 @@ function ProductList({ match }: RouteComponentProps<any>) {
     const [category, setCategory] = useState<CategorySingle | null>(null);
     const [page, setPage] = useState<number>(1);
     const [pageLimit, setPageLimit] = useState<number>(15);
-    const [sort, setSort] = useState<string>('title');
+    const [sort, setSort] = useState<string>('price');
     const [order, setOrder] = useState<string>('desc');
-    const [maxPrice, setMaxPrice] = useState<number>(1000);
+    const [maxPrice, setMaxPrice] = useState<number>(10000);
     const [minPrice, setMinPrice] = useState<number>(100);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [sortButtonTitle, setSortButtonTitle] = useState<string>('Ακριβότερο');
@@ -106,8 +106,8 @@ function ProductList({ match }: RouteComponentProps<any>) {
             limit: pageLimit,
             sort,
             order,
-            price_min: minPrice,
-            price_max: maxPrice,
+            min_price: minPrice,
+            max_price: maxPrice,
         };
 
         getProducts(id, params).then(() => {

@@ -3,6 +3,6 @@ export interface ProductQueryParams {
     limit: number;
     sort: string;
     order: string;
-    price_min: number;
-    price_max: number;
+    min_price: number;
+    max_price: number;
 }

@@ -1,0 +1,48 @@
+.product-card-wrapper {
+    .card {
+        cursor: pointer;
+
+        .product-img {
+            padding: 15px;
+            height: 320px;
+
+            img {
+                width: auto;
+                max-width: 100%;
+                height: auto;
+                max-height: 280px;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+
+        .card-title {
+            * {
+                font-size: 1.125rem;
+            }
+        }
+
+        .product-description {
+            font-size: 0.875rem;
+        }
+
+        .product-price {
+            font-weight: 600;
+            font-family: 'Fira Sans', sans-serif;
+            position: relative;
+            font-size: 1.25rem;
+
+            &::after {
+                content: ' € ';
+                display: inline-block;
+                position: absolute;
+                top: 0;
+                right: -16px;
+            }
+        }
+
+        .card-footer {
+            background-color: var(--footer-bg-color);
+        }
+    }
+}

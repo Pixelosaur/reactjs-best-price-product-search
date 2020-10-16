@@ -1,12 +1,16 @@
+// Core
 import React, { useState } from 'react';
+// Dependencies
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+// Styles
+import './SortActions.scss';
 
 function SortActions({ onOrderChange }: any) {
     const [sortButtonTitle, setSortButtonTitle] = useState<string>('Ακριβότερο');
 
-    const handleSelect = (e: any) => {
-        setSortButtonTitle(e);
+    const handleSelect = (e: unknown) => {
+        setSortButtonTitle(e as string);
     };
 
     return (

@@ -59,25 +59,14 @@ function ProductList({ match }: RouteComponentProps<any>) {
         const category: CategorySingle = await getCategory(categoryId);
         setCategory(category);
 
-        const minPriceEuros = convertCentsToEuros(category.price_min);
-        setMinPrice(minPriceEuros);
-
-        const maxPriceEuros = convertCentsToEuros(category.price_max);
-        setMaxPrice(maxPriceEuros);
+        setMinPrice(category.price_min);
+        setMaxPrice(category.price_max);
 
         const products: Product[] = await getCategoryProducts(categoryId, params);
-        const mappedProducts = products.map((product: Product) => {
-            const convertedPrice: number = convertCentsToEuros(product.price);
-            return { ...product, ...{ price: convertedPrice } };
-        });
-        setProducts(mappedProducts);
+        setProducts(products);
 
-        return mappedProducts;
+        return products;
     }
-
-    const convertCentsToEuros = (value: number): number => {
-        return value / 100;
-    };
 
     const onPageChange = (pageNumber: number): void => {
         setPage(pageNumber);

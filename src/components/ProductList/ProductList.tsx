@@ -79,11 +79,9 @@ function ProductList({ match }: RouteComponentProps<any>) {
         setSortButtonTitle(sortTitle);
     };
 
-    const handleChange = (event: any): void => {
-        const { name, value } = event.target;
-
-        if (name === 'minPrice') setMinPrice(value);
-        if (name === 'maxPrice') setMaxPrice(value);
+    const onSubmit = (value: { minPrice: number; maxPrice: number }): void => {
+        setMinPrice(value.minPrice);
+        setMaxPrice(value.maxPrice);
     };
 
     useEffect(() => {
@@ -102,7 +100,7 @@ function ProductList({ match }: RouteComponentProps<any>) {
         getProducts(id, params).then(() => {
             setIsLoading(false);
         });
-    }, [match.params, page, order, sort, pageLimit]);
+    }, [match.params, page, order, sort, pageLimit, minPrice, maxPrice]);
 
     return (
         <>
@@ -115,11 +113,7 @@ function ProductList({ match }: RouteComponentProps<any>) {
                     ) : null}
 
                     <div className="d-flex flex-wrap justify-content-between align-items-center filter-sort-actions-wrapper">
-                        <PriceFilter
-                            maxPrice={maxPrice}
-                            minPrice={minPrice}
-                            handleChange={handleChange}
-                        />
+                        <PriceFilter maxPrice={maxPrice} minPrice={minPrice} onSubmit={onSubmit} />
                         <SortActions
                             sortButtonTitle={sortButtonTitle}
                             onOrderChange={onOrderChange}

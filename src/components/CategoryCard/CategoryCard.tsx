@@ -13,7 +13,7 @@ interface CategoryCardProps<T> {
 
 function CategoryCard({ categories }: CategoryCardProps<Category[]>) {
     return (
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 category-card-wrapper">
             {categories?.map((category: Category, index: number) => (
                 <div key={index} className="col mb-4">
                     <div className="card h-100">

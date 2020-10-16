@@ -8,6 +8,7 @@
     --link-color: #{$secondary-color};
     --link-color-hover: #{$primary-color};
     --border-color: #{lighten($accent-color, 35%)};
+    --text-muted-color: #{$accent-color};
 }
 
 ::selection {
@@ -23,6 +24,19 @@
     .content-wrapper {
         padding: 1.75rem 0;
         min-height: calc(100vh - (62px + 80px));
+
+        .card {
+            transition: box-shadow ease-in-out 300ms;
+            border: 1px solid var(--border-color);
+
+            &:hover {
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        .text-muted {
+            color: var(--text-muted-color);
+        }
     }
 
     a {

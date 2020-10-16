@@ -1,15 +1,12 @@
-.card {
-    min-height: 160px;
-    transition: box-shadow ease-in-out 300ms;
+.category-card-wrapper {
+    .card {
+        min-height: 160px;
 
-    &:hover {
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    }
-
-    .card-body {
-        background-repeat: no-repeat;
-        background-position: bottom -14px right -22px;
-        background-size: 9rem;
-        padding: 1.5rem;
+        .card-body {
+            background-repeat: no-repeat;
+            background-position: bottom -14px right -22px;
+            background-size: 9rem;
+            padding: 1.5rem;
+        }
     }
 }

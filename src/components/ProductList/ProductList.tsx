@@ -2,20 +2,25 @@
 import React, { useEffect, useState } from 'react';
 // Dependencies
 import axios, { AxiosResponse } from 'axios';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 // Interfaces & Constants
 import { API_URL_CATEGORIES } from '../../Constants';
 import { Product } from '../../interfaces/Product.interface';
-import { Category } from '../../interfaces/Category.interface';
 import { CategorySingle } from '../../interfaces/CategorySingle.interface';
 import { ProductQueryParams } from '../../interfaces/ProductQueryParams.interface';
 // Components
 import Loader from '../Loader/Loader';
+import ProductCard from '../ProductCard/ProductCard';
 import Pagination from '../Pagination/Pagination';
+import PriceFilter from '../PriceFilter/PriceFilter';
+import SortActions from '../SortActions/SortActions';
+import PageTitle from '../PageTitle/PageTitle';
+// Styles
+import './ProductList.scss';
 
 function ProductList({ match }: RouteComponentProps<any>) {
     const [products, setProducts] = useState<Product[]>([]);
-    const [category, setCategory] = useState<Category | null>(null);
+    const [category, setCategory] = useState<CategorySingle | null>(null);
     const [page, setPage] = useState<number>(1);
     const [pageLimit, setPageLimit] = useState<number>(15);
     const [sort, setSort] = useState<string>('title');
@@ -23,6 +28,7 @@ function ProductList({ match }: RouteComponentProps<any>) {
     const [maxPrice, setMaxPrice] = useState<number>(1000);
     const [minPrice, setMinPrice] = useState<number>(100);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [sortButtonTitle, setSortButtonTitle] = useState<string>('Ακριβότερο');
 
     /* Get Category by Id and return a Promise of the category object
      * */
@@ -53,15 +59,43 @@ function ProductList({ match }: RouteComponentProps<any>) {
         const category: CategorySingle = await getCategory(categoryId);
         setCategory(category);
 
+        const minPriceEuros = convertCentsToEuros(category.price_min);
+        setMinPrice(minPriceEuros);
+
+        const maxPriceEuros = convertCentsToEuros(category.price_max);
+        setMaxPrice(maxPriceEuros);
+
         const products: Product[] = await getCategoryProducts(categoryId, params);
-        setProducts(products);
+        const mappedProducts = products.map((product: Product) => {
+            const convertedPrice: number = convertCentsToEuros(product.price);
+            return { ...product, ...{ price: convertedPrice } };
+        });
+        setProducts(mappedProducts);
 
-        return products;
+        return mappedProducts;
     }
 
-    function onPageChange(pageNumber: number): void {
+    const convertCentsToEuros = (value: number): number => {
+        return value / 100;
+    };
+
+    const onPageChange = (pageNumber: number): void => {
         setPage(pageNumber);
-    }
+    };
+
+    const onOrderChange = (orderValue: string): void => {
+        setOrder(orderValue);
+
+        const sortTitle = orderValue === 'asc' ? 'Φθηνότερο' : 'Ακριβότερο';
+        setSortButtonTitle(sortTitle);
+    };
+
+    const handleChange = (event: any): void => {
+        const { name, value } = event.target;
+
+        if (name === 'minPrice') setMinPrice(value);
+        if (name === 'maxPrice') setMaxPrice(value);
+    };
 
     useEffect(() => {
         setIsLoading(true);
@@ -79,7 +113,7 @@ function ProductList({ match }: RouteComponentProps<any>) {
         getProducts(id, params).then(() => {
             setIsLoading(false);
         });
-    }, [match.params, page, order, maxPrice, minPrice, sort, pageLimit]);
+    }, [match.params, page, order, sort, pageLimit]);
 
     return (
         <>
@@ -87,32 +121,27 @@ function ProductList({ match }: RouteComponentProps<any>) {
                 <Loader />
             ) : (
                 <>
-                    <h3>{category?.title}</h3>
-                    <div className="row row-cols-3 pt-4 pb-5">
-                        {products.map((product: Product, index: number) => (
-                            <div key={index} className="col mb-4">
-                                <div className="card h-100">
-                                    <img
-                                        src={product.image_url}
-                                        className="card-img-top"
-                                        alt="Product Category"
-                                    />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{product.title}</h5>
-                                        <Link to={`${product.slug_path}/${product.id}/products`}>
-                                            Το θέλω
-                                            <i className="fas fa-long-arrow-alt-right" />
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                    {category ? (
+                        <PageTitle title={category.title} productsCount={category.products_count} />
+                    ) : null}
+
+                    <div className="d-flex justify-content-between align-items-center filter-sort-actions-wrapper">
+                        <PriceFilter
+                            maxPrice={maxPrice}
+                            minPrice={minPrice}
+                            handleChange={handleChange}
+                        />
+                        <SortActions
+                            sortButtonTitle={sortButtonTitle}
+                            onOrderChange={onOrderChange}
+                        />
                     </div>
+
+                    <ProductCard products={products} />
                     <Pagination onPageChange={onPageChange} currentPage={page} />
                 </>
             )}
         </>
     );
 }
-
 export default ProductList;

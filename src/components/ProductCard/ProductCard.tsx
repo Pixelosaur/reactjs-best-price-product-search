@@ -4,6 +4,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // Interfaces
 import { Product } from '../../interfaces/Product.interface';
+// Helpers
+import { convertCentsToEuros } from '../../Helpers';
 // Styles
 import './ProductCard.scss';
 
@@ -12,9 +14,14 @@ interface ProductCardProps<T> {
 }
 
 function ProductCard({ products }: ProductCardProps<Product[]>) {
+    const mappedProducts = products?.map((product: Product) => {
+        const convertedPrice: number = convertCentsToEuros(product.price);
+        return { ...product, ...{ price: convertedPrice } };
+    });
+
     return (
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 pt-4 pb-5 product-card-wrapper">
-            {products?.map((product: Product, index: number) => (
+            {mappedProducts.map((product: Product, index: number) => (
                 <div key={index} className="col mb-4">
                     <div className="card h-100">
                         <div className="product-img">

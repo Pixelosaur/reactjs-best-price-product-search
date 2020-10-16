@@ -12,7 +12,7 @@ function PriceFilter({ minPrice, maxPrice, handleChange }: PriceFilterProps) {
     return (
         <div className="price-filter-wrapper">
             <form>
-                <div className="form-row justify-content-start align-items-center">
+                <div className="form-row ml-0 justify-content-start align-items-center">
                     <span>Τιμή από</span>
                     <div className="col col-md-3">
                         <input
@@ -36,7 +36,7 @@ function PriceFilter({ minPrice, maxPrice, handleChange }: PriceFilterProps) {
                         />
                     </div>
                     <span>€</span>
-                    <div className="col col-md-2 ml-2">
+                    <div className="col-1 ml-2">
                         <button type="submit" className="btn btn-sm btn-bp-primary-outline">
                             <i className="fas fa-check" />
                         </button>

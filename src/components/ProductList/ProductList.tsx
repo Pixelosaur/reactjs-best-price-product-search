@@ -114,7 +114,7 @@ function ProductList({ match }: RouteComponentProps<any>) {
                         <PageTitle title={category.title} productsCount={category.products_count} />
                     ) : null}
 
-                    <div className="d-flex justify-content-between align-items-center filter-sort-actions-wrapper">
+                    <div className="d-flex flex-wrap justify-content-between align-items-center filter-sort-actions-wrapper">
                         <PriceFilter
                             maxPrice={maxPrice}
                             minPrice={minPrice}

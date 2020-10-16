@@ -9,6 +9,8 @@
     --link-color-hover: #{$primary-color};
     --border-color: #{lighten($accent-color, 35%)};
     --text-muted-color: #{$accent-color};
+    --btn-primary-bg-color: #{$primary-color};
+    --btn-secondary-bg-color-hover: #{lighten($accent-color, 40%)};
 }
 
 ::selection {
@@ -37,6 +39,34 @@
         .text-muted {
             color: var(--text-muted-color);
         }
+
+        .btn {
+            transition: all ease-in-out 300ms;
+        }
+
+        .btn-bp-primary {
+            background-color: var(--btn-primary-bg-color);
+            color: white;
+            border: 1px solid var(--btn-primary-bg-color);
+
+            &:hover {
+                background-color: transparent;
+                color: var(--link-color-hover);
+            }
+        }
+
+        .btn-bp-secondary {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--link-color);
+            font-weight: 600;
+            letter-spacing: 0.25px;
+
+            &:hover {
+                background-color: var(--btn-secondary-bg-color-hover);
+                color: var(--link-color-hover);
+            }
+        }
     }
 
     a {
@@ -64,7 +94,8 @@
     h3,
     h4,
     h5,
-    h6 {
+    h6,
+    .btn {
         font-family: 'Fira Sans', sans-serif;
         font-weight: 600;
     }

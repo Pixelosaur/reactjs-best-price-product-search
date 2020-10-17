@@ -25,8 +25,8 @@ function ProductList({ match }: RouteComponentProps<any>) {
     const [pageLimit, setPageLimit] = useState<number>(15);
     const [sort, setSort] = useState<string>('price');
     const [order, setOrder] = useState<string>('desc');
-    const [maxPrice, setMaxPrice] = useState<number>(10000);
-    const [minPrice, setMinPrice] = useState<number>(100);
+    const [maxPrice, setMaxPrice] = useState<number | null>(null);
+    const [minPrice, setMinPrice] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [sortButtonTitle, setSortButtonTitle] = useState<string>('Ακριβότερο');
 
@@ -61,7 +61,6 @@ function ProductList({ match }: RouteComponentProps<any>) {
      * */
     async function getProducts(categoryId: number, params: ProductQueryParams): Promise<Product[]> {
         const category: CategorySingle = await getCategory(categoryId);
-        setCategory(category);
 
         setMinPrice(category.price_min);
         setMaxPrice(category.price_max);
@@ -132,7 +131,13 @@ function ProductList({ match }: RouteComponentProps<any>) {
                     ) : null}
 
                     <div className="d-flex flex-wrap justify-content-between align-items-center filter-sort-actions-wrapper">
-                        <PriceFilter maxPrice={maxPrice} minPrice={minPrice} onSubmit={onSubmit} />
+                        {minPrice !== null && maxPrice !== null ? (
+                            <PriceFilter
+                                maxPrice={maxPrice}
+                                minPrice={minPrice}
+                                onSubmit={onSubmit}
+                            />
+                        ) : null}
                         <SortActions
                             sortButtonTitle={sortButtonTitle}
                             onOrderChange={onOrderChange}

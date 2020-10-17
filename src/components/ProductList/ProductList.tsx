@@ -55,7 +55,7 @@ function ProductList({ match }: RouteComponentProps<any>) {
     /*  Set the category state and then set the products state and return a Promise
      * of the array of products listed in the specified category
      * */
-    async function getProducts(categoryId: number, params: any): Promise<Product[]> {
+    async function getProducts(categoryId: number, params: ProductQueryParams): Promise<Product[]> {
         const category: CategorySingle = await getCategory(categoryId);
         setCategory(category);
 

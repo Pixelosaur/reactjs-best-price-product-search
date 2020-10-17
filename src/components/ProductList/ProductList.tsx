@@ -36,6 +36,8 @@ function ProductList({ match }: RouteComponentProps<any>) {
         const apiUrl: string = `${API_URL_CATEGORIES}/${categoryId}`;
 
         const response: AxiosResponse<CategorySingle> = await axios.get<CategorySingle>(apiUrl);
+        setCategory(response.data);
+
         return response.data;
     }
 
@@ -49,6 +51,8 @@ function ProductList({ match }: RouteComponentProps<any>) {
         const apiUrl: string = `${API_URL_CATEGORIES}/${categoryId}/products`;
 
         const response: AxiosResponse<Product[]> = await axios.get<Product[]>(apiUrl, { params });
+        setProducts(response.data);
+
         return response.data;
     }
 
@@ -62,10 +66,7 @@ function ProductList({ match }: RouteComponentProps<any>) {
         setMinPrice(category.price_min);
         setMaxPrice(category.price_max);
 
-        const products: Product[] = await getCategoryProducts(categoryId, params);
-        setProducts(products);
-
-        return products;
+        return getCategoryProducts(categoryId, params);
     }
 
     const onPageChange = (pageNumber: number): void => {
@@ -98,6 +99,24 @@ function ProductList({ match }: RouteComponentProps<any>) {
         };
 
         getProducts(id, params).then(() => {
+            setIsLoading(false);
+        });
+    }, []);
+
+    useEffect(() => {
+        setIsLoading(true);
+
+        const { id } = match.params;
+        const params: ProductQueryParams = {
+            page,
+            limit: pageLimit,
+            sort,
+            order,
+            min_price: minPrice,
+            max_price: maxPrice,
+        };
+
+        getCategoryProducts(id, params).then(() => {
             setIsLoading(false);
         });
     }, [match.params, page, order, sort, pageLimit, minPrice, maxPrice]);
